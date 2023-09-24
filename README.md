@@ -1,16 +1,44 @@
-# github_dart_repository
+# GitHub Dart Repository Viewer
 
-View github dart repository
+This Flutter project allows users to view GitHub Dart repositories.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Navigate to the project directory:
+   ```cd github_dart_repository```
+2. Install dependencies:
+   ```flutter pub get```
+3. Run the app:
+   ```flutter run```
 
-A few resources to get you started if this is your first Flutter project:
+## Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Ensure you have the following installed on your local system:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK (compatible with `>=3.0.5 <4.0.0`)
+- Dart SDK
+
+## Dependencies
+
+This project utilizes the following packages:
+
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons) `^1.0.2`
+- [dartz](https://pub.dev/packages/dartz) `^0.10.1`
+- [dio](https://pub.dev/packages/dio) `^5.3.3`
+- [logger](https://pub.dev/packages/logger) `^2.0.2+1`
+- [json_annotation](https://pub.dev/packages/json_annotation) `^4.8.1`
+- [cached_network_image](https://pub.dev/packages/cached_network_image) `^3.2.3`
+- [get_it](https://pub.dev/packages/get_it) `^7.6.4`
+- [provider](https://pub.dev/packages/provider) `^6.0.5`
+- [copy_with_extension](https://pub.dev/packages/copy_with_extension) `^5.0.4`
+- [infinite_scroll_pagination](https://pub.dev/packages/infinite_scroll_pagination) `^4.0.0`
+- [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) `^9.0.0`
+- [connectivity_plus](https://pub.dev/packages/connectivity_plus) `^4.0.2`
+
+## Development Dependencies
+
+- [flutter_test](https://pub.dev/packages/flutter_test)
+- [flutter_lints](https://pub.dev/packages/flutter_lints) `^2.0.0`
+- [build_runner](https://pub.dev/packages/build_runner) `^2.3.3`
+- [json_serializable](https://pub.dev/packages/json_serializable) `^6.6.2`
+- [copy_with_extension_gen](https://pub.dev/packages/copy_with_extension_gen) `^5.0.2`
