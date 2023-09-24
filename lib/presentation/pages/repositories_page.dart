@@ -77,8 +77,14 @@ class _RepositoriesPageState extends State<RepositoriesPage> {
     return PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<RepositoryModel>(
-        itemBuilder: (context, item, index) =>
-            RepositoryCard(model: item, isSaved: true),
+        itemBuilder: (context, item, index) {
+          return RepositoryCard(
+            model: _provider.models[index],
+            onTap: () {
+              _provider.save(item);
+            },
+          );
+        },
       ),
       separatorBuilder: (_, __) => const Divider(),
     );

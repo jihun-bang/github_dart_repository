@@ -4,12 +4,12 @@ import 'package:github_dart_repository/data/models/repository_model.dart';
 
 class RepositoryCard extends StatelessWidget {
   final RepositoryModel model;
-  final bool isSaved;
+  final VoidCallback onTap;
 
   const RepositoryCard({
     super.key,
     required this.model,
-    required this.isSaved,
+    required this.onTap,
   });
 
   @override
@@ -22,8 +22,8 @@ class RepositoryCard extends StatelessWidget {
       ),
       title: Text(model.fullName),
       subtitle: Text(model.htmlUrl),
-      trailing: Icon(isSaved ? Icons.star : Icons.star_border),
-      onTap: () {},
+      trailing: Icon(model.isSaved ? Icons.star : Icons.star_border),
+      onTap: onTap,
     );
   }
 }

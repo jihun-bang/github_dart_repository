@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:github_dart_repository/dependencies_injection.dart';
 import 'package:github_dart_repository/presentation/pages/repositories_page.dart';
 import 'package:github_dart_repository/presentation/providers/github_provider.dart';
 import 'package:provider/provider.dart';
+
+const storage = FlutterSecureStorage();
 
 void main() {
   setupLocator();
