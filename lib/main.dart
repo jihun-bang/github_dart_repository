@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:github_dart_repository/dependencies_injection.dart';
 import 'package:github_dart_repository/presentation/pages/repositories_page.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
 }
 
