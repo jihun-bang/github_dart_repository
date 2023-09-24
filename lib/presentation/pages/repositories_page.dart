@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:github_dart_repository/core/utils/logger.dart';
 import 'package:github_dart_repository/data/models/repository_request_model.dart';
@@ -16,6 +17,7 @@ class RepositoriesPage extends StatefulWidget {
 }
 
 class _RepositoriesPageState extends State<RepositoriesPage> {
+  bool _isOffline = false;
   int _currentOption = 0;
   final PagingController<int, RepositoryModel> _pagingController =
       PagingController(firstPageKey: 0);
@@ -40,15 +42,27 @@ class _RepositoriesPageState extends State<RepositoriesPage> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      _provider.updateParams(_provider.params
-          .copyWith(page: _provider.params.page + (pageKey != 0 ? 1 : 0)));
-      final newModels = await _provider.getModels();
-      final isLastPage = pageKey == 80;
-      if (isLastPage) {
+      final connectivityResult = await (Connectivity().checkConnectivity());
+      final isOffline = connectivityResult == ConnectivityResult.none;
+      if (_isOffline != isOffline) {
+        setState(() {
+          _isOffline = isOffline;
+        });
+      }
+      if (isOffline) {
+        final newModels = await _provider.getModels(local: true);
         _pagingController.appendLastPage(newModels);
       } else {
-        final nextPageKey = pageKey + newModels.length;
-        _pagingController.appendPage(newModels, nextPageKey);
+        _provider.updateParams(_provider.params
+            .copyWith(page: _provider.params.page + (pageKey != 0 ? 1 : 0)));
+        final newModels = await _provider.getModels();
+        final isLastPage = pageKey == 80;
+        if (isLastPage) {
+          _pagingController.appendLastPage(newModels);
+        } else {
+          final nextPageKey = pageKey + newModels.length;
+          _pagingController.appendPage(newModels, nextPageKey);
+        }
       }
     } catch (error) {
       Logger.e(error);
@@ -67,7 +81,8 @@ class _RepositoriesPageState extends State<RepositoriesPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: const Text('Dart Repositories'),
+            title: Text(
+                'Dart Repositories (${_isOffline ? 'Offline' : 'Online'})'),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
