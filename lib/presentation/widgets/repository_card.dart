@@ -17,10 +17,10 @@ class RepositoryCard extends StatelessWidget {
     return ListTile(
       leading: CachedNetworkImage(
         imageUrl: model.owner.avatarUrl,
-        width: 36,
-        height: 36,
+        width: 40,
+        height: 40,
       ),
-      title: Text(model.owner.login),
+      title: Text(model.fullName),
       subtitle: Text(model.htmlUrl),
       trailing: Icon(isSaved ? Icons.star : Icons.star_border),
       onTap: () {},

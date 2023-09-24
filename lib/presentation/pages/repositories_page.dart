@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:github_dart_repository/data/models/owner_model.dart';
-import 'package:github_dart_repository/data/models/repository_model.dart';
+import 'package:github_dart_repository/presentation/providers/github_provider.dart';
 import 'package:github_dart_repository/presentation/widgets/repository_card.dart';
+import 'package:provider/provider.dart';
 
 class RepositoriesPage extends StatefulWidget {
   const RepositoriesPage({super.key});
@@ -11,40 +11,38 @@ class RepositoriesPage extends StatefulWidget {
 }
 
 class _RepositoriesPageState extends State<RepositoriesPage> {
+  late GithubProvider _provider;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Dart Repositories'),
-      ),
-      body: Column(
-        children: [
-          Expanded(child: repositories),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {},
-        child: const Icon(Icons.refresh),
-      ), //
-    );
+    return Consumer<GithubProvider>(builder: (_, provider, ___) {
+      _provider = provider;
+
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Text('Dart Repositories'),
+        ),
+        body: Column(
+          children: [
+            Expanded(child: repositories),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {},
+          child: const Icon(Icons.refresh),
+        ), //
+      );
+    });
   }
 
   Widget get repositories {
     return ListView.separated(
-        itemBuilder: (_, __) {
-          return RepositoryCard(
-              model: RepositoryModel(
-                id: 1,
-                htmlUrl:
-                    'https://api.flutter.dev/flutter/material/ListTile-class.html',
-                fullName: 'fullName',
-                owner: OwnerModel(login: 'testUser', avatarUrl: ''),
-              ),
-              isSaved: false);
+        itemBuilder: (_, index) {
+          return RepositoryCard(model: _provider.models[index], isSaved: false);
         },
-        separatorBuilder: (_, __) => Divider(),
-        itemCount: 10);
+        separatorBuilder: (_, __) => const Divider(),
+        itemCount: _provider.models.length);
   }
 }

@@ -7,8 +7,8 @@ import '../../domain/usecases/github_usecase.dart';
 class GithubProvider extends ChangeNotifier {
   final GithubUseCase _useCase;
 
-  List<RepositoryModel> _models = [];
-  List<RepositoryModel> get model => _models;
+  List<RepositoryModel> _models = const [];
+  List<RepositoryModel> get models => _models;
 
   RepositoryRequestModel _params = const RepositoryRequestModel();
   RepositoryRequestModel get params => _params;
@@ -18,7 +18,7 @@ class GithubProvider extends ChangeNotifier {
   }
 
   Future<void> updateModels() async {
-    await _useCase.getRepositories(params: params);
+    _models = await _useCase.getRepositories(params: params);
     notifyListeners();
   }
 
