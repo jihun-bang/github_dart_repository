@@ -2,14 +2,18 @@
 
 This Flutter project allows users to view GitHub Dart repositories.
 
-## Getting Started
+## Development Environment
 
-1. Navigate to the project directory:
-   ```cd github_dart_repository```
-2. Install dependencies:
-   ```flutter pub get```
-3. Run the app:
-   ```flutter run```
+### IDE
+Android Studio Flamingo | 2022.2.1 Patch 2
+Build #AI-222.4459.24.2221.10121639, built on May 12, 2023
+Runtime version: 17.0.6+0-b2043.56-9586694 amd6
+
+### Framework & SDK
+Flutter 3.13.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 12fccda598 (5 days ago) • 2023-09-19 13:56:11 -0700
+Engine • revision bd986c5ed2
+Tools • Dart 3.1.2 • DevTools 2.25.0
 
 ## Prerequisites
 
@@ -42,3 +46,15 @@ This project utilizes the following packages:
 - [build_runner](https://pub.dev/packages/build_runner) `^2.3.3`
 - [json_serializable](https://pub.dev/packages/json_serializable) `^6.6.2`
 - [copy_with_extension_gen](https://pub.dev/packages/copy_with_extension_gen) `^5.0.2`
+
+## Getting Started
+
+1. Navigate to the project directory:
+```cd github_dart_repository
+```
+2. Install dependencies:
+```flutter pub get
+```
+3. Run the app:
+```flutter run
+```
