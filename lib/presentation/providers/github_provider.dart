@@ -13,13 +13,13 @@ class GithubProvider extends ChangeNotifier {
   RepositoryRequestModel _params = const RepositoryRequestModel();
   RepositoryRequestModel get params => _params;
 
-  GithubProvider(this._useCase) {
-    updateModels();
-  }
+  GithubProvider(this._useCase);
 
-  Future<void> updateModels() async {
-    _models = await _useCase.getRepositories(params: params);
+  Future<List<RepositoryModel>> getModels() async {
+    final newModels = await _useCase.getRepositories(params: params);
+    _models = newModels + _models;
     notifyListeners();
+    return newModels;
   }
 
   void updateParams(RepositoryRequestModel params) {
