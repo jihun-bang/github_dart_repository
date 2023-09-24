@@ -19,7 +19,7 @@ class GithubRemoteDatasourceImpl implements GithubRemoteDatasource {
   Future<Either<Failure, List<RepositoryModel>>> getRepositories(
       {required RepositoryRequestModel params}) async {
     final response = await _client.getRequest(
-      '/search/repositories?q=language:dart',
+      '/search/repositories?q=${params.sort == null ? 'dart+' : ''}language:dart',
       queryParameters: params.toJson(),
       converter: (response) => (response['items'] as List)
           .map((e) => RepositoryModel.fromJson(e))

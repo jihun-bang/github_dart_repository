@@ -16,9 +16,11 @@ class RepositoriesPage extends StatefulWidget {
 }
 
 class _RepositoriesPageState extends State<RepositoriesPage> {
+  int _currentOption = 0;
   final PagingController<int, RepositoryModel> _pagingController =
       PagingController(firstPageKey: 0);
   late GithubProvider _provider;
+  final _menu = ['Best Match', 'Most Stars', 'Recently Updated'];
 
   @override
   void initState() {
@@ -59,18 +61,50 @@ class _RepositoriesPageState extends State<RepositoriesPage> {
     return Consumer<GithubProvider>(builder: (_, provider, ___) {
       _provider = provider;
 
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text('Dart Repositories'),
-        ),
-        body: Column(
-          children: [
-            Expanded(child: repositories),
-          ],
+      return DefaultTabController(
+        initialIndex: 0,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: const Text('Dart Repositories'),
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _dropdownMenu,
+              Expanded(child: repositories),
+            ],
+          ),
         ),
       );
     });
+  }
+
+  Widget get _dropdownMenu {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, bottom: 8),
+      child: DropdownMenu<int>(
+        initialSelection: 0,
+        onSelected: (index) {
+          if (_currentOption != index && index != null) {
+            _currentOption = index;
+            final sort = switch (index) {
+              0 => null,
+              1 => SortType.stars,
+              _ => SortType.updated,
+            };
+            _provider
+                .updateParams(_provider.params.copyWith(sort: sort, page: 1));
+            _provider.reset();
+            _pagingController.refresh();
+          }
+        },
+        dropdownMenuEntries: _menu.map<DropdownMenuEntry<int>>((String value) {
+          return DropdownMenuEntry(value: _menu.indexOf(value), label: value);
+        }).toList(),
+      ),
+    );
   }
 
   Widget get repositories {

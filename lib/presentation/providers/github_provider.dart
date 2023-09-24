@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:github_dart_repository/core/utils/logger.dart';
 import 'package:github_dart_repository/data/models/repository_model.dart';
 
 import '../../data/models/repository_request_model.dart';
@@ -22,11 +23,17 @@ class GithubProvider extends ChangeNotifier {
     final newModels = await _useCase.getRepositories(params: params);
     _models = _models + newModels;
     final localModels = await _getLocalModels();
+    Logger.d(_models.map((e) => e.toJson()));
     for (var model in models) {
       _updateSaved(localModels: localModels, checkModel: model);
     }
     notifyListeners();
     return newModels;
+  }
+
+  void reset() {
+    _models = [];
+    notifyListeners();
   }
 
   void updateParams(RepositoryRequestModel params) {

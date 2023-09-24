@@ -92,12 +92,20 @@ RepositoryRequestModel _$RepositoryRequestModelFromJson(
     );
 
 Map<String, dynamic> _$RepositoryRequestModelToJson(
-        RepositoryRequestModel instance) =>
-    <String, dynamic>{
-      'sort': _$SortTypeEnumMap[instance.sort],
-      'per_page': instance.perPage,
-      'page': instance.page,
-    };
+    RepositoryRequestModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sort', _$SortTypeEnumMap[instance.sort]);
+  val['per_page'] = instance.perPage;
+  val['page'] = instance.page;
+  return val;
+}
 
 const _$SortTypeEnumMap = {
   SortType.stars: 'stars',

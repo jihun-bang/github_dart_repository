@@ -6,6 +6,7 @@ part 'repository_request_model.g.dart';
 @CopyWith()
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class RepositoryRequestModel {
+  @JsonKey(includeIfNull: false)
   final SortType? sort;
   final int perPage;
   final int page;

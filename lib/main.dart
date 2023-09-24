@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<GithubProvider>(create: (_) => sl()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Github Dart Repositories',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),

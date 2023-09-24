@@ -26,7 +26,7 @@ class DioInterceptor extends Interceptor {
         "REQUEST ► ︎ ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"${options.baseUrl}${options.path}"}\n\n"
         "Headers:\n"
         "$headerMessage\n"
-        "❖ QueryParameters : \n"
+        "QueryParameters : ${options.queryParameters}\n"
         "Body: $prettyJson",
       );
     } catch (e, stackTrace) {
