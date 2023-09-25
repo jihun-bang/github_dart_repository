@@ -19,6 +19,7 @@ class RepositoryCard extends StatelessWidget {
         imageUrl: model.owner.avatarUrl,
         width: 40,
         height: 40,
+        errorWidget: (_, __, ___) => const Icon(Icons.person),
       ),
       title: Text(model.fullName),
       subtitle: Text(model.htmlUrl),

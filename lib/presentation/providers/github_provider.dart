@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:github_dart_repository/core/utils/logger.dart';
 import 'package:github_dart_repository/data/models/repository_model.dart';
 
 import '../../data/models/repository_request_model.dart';
@@ -16,6 +17,10 @@ class GithubProvider extends ChangeNotifier {
   GithubProvider(this._useCase);
 
   Future<List<RepositoryModel>> getModels({bool local = false}) async {
+    if (local) {
+      reset();
+    }
+    Logger.e(models.length);
     final newModels = await (local
         ? _useCase.getLocalModels()
         : _useCase.getRepositories(params: params));
@@ -35,6 +40,7 @@ class GithubProvider extends ChangeNotifier {
 
   void reset() {
     _models = [];
+    _params = const RepositoryRequestModel();
     notifyListeners();
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:github_dart_repository/dependencies_injection.dart';
-import 'package:github_dart_repository/presentation/pages/repositories_page.dart';
+import 'package:github_dart_repository/presentation/pages/home_page.dart';
 import 'package:github_dart_repository/presentation/providers/github_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
           useMaterial3: true,
         ),
-        home: const RepositoriesPage(),
+        home: const HomePage(),
       ),
     );
   }
